@@ -20,7 +20,6 @@ return {
 					}
 				})
 			},
-			log_level = vim.log.levels.TRACE
 		})
 	end,
 	keys = {
