@@ -7,3 +7,6 @@
 -- save file with CTRL+save
 vim.keymap.set('n', '<c-s>', ':w<CR>')
 vim.keymap.set('n', '<c-q>', ':bd<CR>')
+
+-- prevent unwanted paste buffer fills from delete char
+vim.keymap.set('n', 'x', '"_x')
