@@ -5,7 +5,8 @@ return {
 		"nvim-lua/plenary.nvim",
 		"antoinemadec/FixCursorHold.nvim",
 		"olimorris/neotest-phpunit",
-		"thenbe/neotest-playwright"
+		"thenbe/neotest-playwright",
+		"nvim-neotest/neotest-jest"
 	},
 	config = function()
 		require("neotest").setup({
@@ -18,6 +19,13 @@ return {
 						persist_project_selection = true,
 						enable_dynamic_test_discovery = true
 					}
+				}),
+				require("neotest-jest")({
+					jestCommand = "npm test --",
+					env = { CI = true },
+					cwd = function(path)
+						return vim.fn.getcwd()
+					end,
 				})
 			},
 		})

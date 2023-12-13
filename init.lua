@@ -432,15 +432,15 @@ vim.defer_fn(function()
           ['[]'] = '@class.outer',
         },
       },
-      swap = {
-        enable = true,
-        swap_next = {
-          ['<leader>a'] = '@parameter.inner',
-        },
-        swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
-        },
-      },
+      -- swap = {
+      --   enable = true,
+      --   swap_next = {
+      --     ['<leader>a'] = '@parameter.inner',
+      --   },
+      --   swap_previous = {
+      --     ['<leader>A'] = '@parameter.inner',
+      --   },
+      -- },
     },
   }
 end, 0)
@@ -529,38 +529,35 @@ local servers = {
       telemetry = { enable = false },
     },
   },
-  -- phpactor = {
-  --   ['logging.enabled'] = true,
-  --   ['logging.level'] = "debug",
-  --   ['language_server.trace'] = true,
-  --   ['language_server.profile'] = true,
-  --   --['blackfire.enabled'] = true
-  -- }
-  intelephense = {
-    intelephense = {
-      trace = {
-        server = "verbose",
-      },
-      files = {
-        exclude = {
-          "**/.git/**",
-          "**/.svn/**",
-          "**/.hg/**",
-          "**/CVS/**",
-          "**/.DS_Store/**",
-          "**/node_modules/**",
-          "**/bower_components/**",
-          "**/vendor/**/{Tests,tests}/**",
-          "**/.history/**",
-          "**/vendor/**/vendor/**",
-          "**/public/**",
-          "**/storage/**",
-          "**/docker/**",
-          "**/s3/**"
-        }
-      }
-    }
+  phpactor = {
+    ['indexer.exclude_patterns'] = { '*/vendor/**/Tests/**/*', '*/node_modules/*', '*/vendor/**/tests/**/*', '**/.git/**', '**/.DS_Store/**', '**/vendor/**/vendor/**', '**/public/**', '**/storage/**', '**/docker/**', '**/s3/**' },
+    ['phpunit.enabled'] = true
   }
+  -- intelephense = {
+  --   intelephense = {
+  --     trace = {
+  --       server = "verbose",
+  --     },
+  --     files = {
+  --       exclude = {
+  --         "**/.git/**",
+  --         "**/.svn/**",
+  --         "**/.hg/**",
+  --         "**/CVS/**",
+  --         "**/.DS_Store/**",
+  --         "**/node_modules/**",
+  --         "**/bower_components/**",
+  --         "**/vendor/**/{Tests,tests}/**",
+  --         "**/.history/**",
+  --         "**/vendor/**/vendor/**",
+  --         "**/public/**",
+  --         "**/storage/**",
+  --         "**/docker/**",
+  --         "**/s3/**"
+  --       }
+  --     }
+  --   }
+  -- }
 }
 
 -- Setup neovim lua configuration
@@ -588,11 +585,11 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
--- setup phpactor init options
--- require('lspconfig').phpactor.setup {
---   on_attach = on_attach,
---   init_options = servers['phpactor']
--- }
+--[[ setup phpactor init options ]]
+require('lspconfig').phpactor.setup {
+  on_attach = on_attach,
+  init_options = servers['phpactor']
+}
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
